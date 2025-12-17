@@ -1,0 +1,79 @@
+ <div class="card shadow-sm mt-3">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <span class="font-weight-semibold small text-uppercase">
+              Employees
+            </span>
+            <div class="d-flex align-items-center">
+              <input
+                [(ngModel)]="employeeFilter"
+                type="text"
+                class="form-control form-control-sm mr-2"
+                placeholder="Filter by name or role" />
+              <select class="custom-select custom-select-sm w-auto">
+                <option>Status: All</option>
+                <option>Active</option>
+                <option>On leave</option>
+                <option>Inactive</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table mb-0 table-hover table-sm align-middle">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Employee</th>
+                  <th scope="col" class="d-none d-md-table-cell">Role</th>
+                  <th scope="col">Department</th>
+                  <th scope="col" class="d-none d-lg-table-cell">Joined</th>
+                  <th scope="col">Status</th>
+                  <th scope="col" class="text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let emp of filteredEmployees()"
+                  class="employee-row">
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div class="avatar avatar-sm rounded-circle mr-2">
+                        <span>{{ getInitials(emp.name) }}</span>
+                      </div>
+                      <div>
+                        <div class="small font-weight-semibold">{{ emp.name }}</div>
+                        <div class="small text-muted d-md-none">{{ emp.role }}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="d-none d-md-table-cell small">{{ emp.role }}</td>
+                  <td class="small">{{ emp.department }}</td>
+                  <td class="d-none d-lg-table-cell small text-muted">
+                    {{ emp.joined | date: 'mediumDate' }}
+                  </td>
+                  <td>
+                    <span
+                      class="badge badge-pill"
+                      [ngClass]="statusClass(emp.status)">
+                      {{ emp.status }}
+                    </span>
+                  </td>
+                  <td class="text-right">
+                    <button class="btn btn-outline-secondary btn-sm mr-1">
+                      <i class="far fa-eye"></i>
+                    </button>
+                    <button class="btn btn-outline-primary btn-sm mr-1">
+                      <i class="far fa-edit"></i>
+                    </button>
+                    <button class="btn btn-outline-danger btn-sm">
+                      <i class="far fa-trash-alt"></i>
+                    </button>
+                  </td>
+                </tr>
+                <tr *ngIf="filteredEmployees().length === 0">
+                  <td colspan="6" class="text-center small text-muted py-3">
+                    No employees match the current filter.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>

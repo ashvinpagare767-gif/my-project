@@ -1,0 +1,224 @@
+$app-navbar-height: 56px;
+$app-sidebar-width: 240px;
+$app-sidebar-width-collapsed: 70px;
+
+.app-wrapper {
+  min-height: 100vh;
+}
+
+/* Top navbar spacing */
+.app-navbar {
+  height: $app-navbar-height;
+  z-index: 1030;
+  background-color: #2facbc !important;
+  display: -webkit-box !important;
+  .text-heading-color{
+    color: #fff7fe !important;
+    padding-left: 4px;
+  }
+}
+
+/* Compensate for fixed navbar */
+.app-body {
+  margin-top: $app-navbar-height;
+}
+
+/* Sidebar */
+.app-sidebar {
+  width: $app-sidebar-width;
+  min-height: calc(100vh - #{$app-navbar-height});
+  position: sticky;
+  top: $app-navbar-height;
+  padding: 1rem 0.75rem;
+  transition: width 0.2s ease;
+  overflow-x: hidden;
+
+  .sidebar-header {
+    padding: 0 0.5rem;
+  }
+
+  .sidebar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.8);
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.4rem;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.15s ease, color 0.15s ease;
+    margin-bottom: 0.2rem;
+
+    .link-text {
+      white-space: nowrap;
+    }
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    &.active {
+      background-image: linear-gradient(90deg, #007bff, #00bcd4);
+      color: #ffffff;
+    }
+
+    i {
+      width: 20px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+  }
+
+  &.collapsed {
+    width: $app-sidebar-width-collapsed;
+
+    .link-text {
+      display: none;
+    }
+
+    .sidebar-header span {
+      opacity: 0;
+    }
+  }
+}
+
+/* Main content */
+.app-main {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - #{$app-navbar-height});
+  background-color: #f5f6fa;
+}
+
+/* Summary cards */
+.summary-card {
+  border: none;
+  .summary-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #444;
+  }
+}
+
+/* Soft background helpers */
+.bg-soft-primary {
+  background-color: rgba(0, 123, 255, 0.12);
+}
+
+.bg-soft-success {
+  background-color: rgba(40, 167, 69, 0.12);
+}
+
+.bg-soft-warning {
+  background-color: rgba(255, 193, 7, 0.16);
+}
+
+.bg-soft-info {
+  background-color: rgba(23, 162, 184, 0.12);
+}
+
+/* Avatar styles */
+.avatar {
+  width: 32px;
+  height: 32px;
+  background-color: #e2e6ea;
+  color: #495057;
+  font-size: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+.avatar-sm {
+  width: 28px;
+  height: 28px;
+  font-size: 0.7rem;
+}
+
+/* Notification badge positioning */
+.notif-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+}
+
+/* Activity list */
+.activity-item {
+  transition: background-color 0.15s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f8f9fa;
+  }
+}
+
+/* Chart placeholder */
+.chart-placeholder {
+  display: flex;
+  align-items: flex-end;
+  height: 180px;
+  border-radius: 0.5rem;
+  background: linear-gradient(to top, #f1f3f5, #ffffff);
+  padding: 1rem;
+  overflow: hidden;
+  .highcharts-container{
+    width: 100%; 
+    height: 500px;
+    display: block;
+  }  
+}
+
+.chart-legend .legend-item {
+  font-size: 0.75rem;
+
+  .legend-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    margin-right: 4px;
+  }
+}
+
+/* Employee table */
+.employee-row {
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  &:hover {
+    background-color: #f8f9fa;
+  }
+}
+
+/* Footer */
+.app-footer {
+  border-top: 1px solid #dee2e6;
+  background-color: #ffffff;
+}
+
+/* Responsive behaviour */
+@media (max-width: 991.98px) {
+  .app-sidebar {
+    position: fixed;
+    left: 0;
+    top: $app-navbar-height;
+    bottom: 0;
+    z-index: 1020;
+    transform: translateX(0);
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.12);
+
+    &.collapsed {
+      transform: translateX(-100%);
+    }
+  }
+
+  .app-main {
+    margin-left: 0;
+  }
+}
+
+
